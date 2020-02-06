@@ -1136,8 +1136,13 @@
             }
 
             //if a new date range was selected, invoke the user callback function
-            if (!this.startDate.isSame(this.oldStartDate) || !this.endDate.isSame(this.oldEndDate))
-                this.callback(this.startDate, this.endDate, this.chosenLabel);
+            if (!this.startDate.isSame(this.oldStartDate) || !this.endDate.isSame(this.oldEndDate)) {
+                if (!this.timePicker) {
+                    this.callback(this.startDate.startOf('day'), this.endDate.endOf('day'), this.chosenLabel);
+                } else {
+                    this.callback(this.startDate, this.endDate, this.chosenLabel);
+                }
+            }
 
             //if picker is attached to a text input, update it
             this.updateElement();
